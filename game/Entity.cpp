@@ -6,6 +6,11 @@ game::Entity::Entity() : transform(), _parent(nullptr), _children(), _components
 
 }
 
+game::Entity::Entity(std::string tag) : _tag(tag), transform(), _parent(nullptr), _children(), _components()
+{
+
+}
+
 game::Entity::~Entity()
 {
 

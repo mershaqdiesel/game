@@ -30,9 +30,9 @@ namespace game
 
 		virtual ~ColliderComponent() {};
 		
-		void SetTrigger(std::function<void(std::shared_ptr<Entity>&)> trigger) { _trigger = trigger; };
-		void OnTrigger(std::shared_ptr<Entity>& other) { if (_isTrigger && _trigger != nullptr) { _trigger(other); } };
-		bool IsTrigger() { return _isTrigger; };
+		void SetTrigger(std::function<void(std::shared_ptr<Entity>&, std::shared_ptr<Entity>&)> trigger) { if (trigger != nullptr) { _trigger = trigger; _isTrigger = true; } };
+		void OnTrigger(std::shared_ptr<Entity>& other) { if (_isTrigger && _trigger != nullptr) { _trigger(this->_parent, other); } };
+		bool IsTrigger() const { return _isTrigger; };
 
 		void SetShape(BBType shape) { _shape = shape; };
 		BBType GetShape() { return _shape; };
@@ -41,7 +41,7 @@ namespace game
 		BBType _shape;
 		bool _isTrigger;
 		std::shared_ptr<RigidBody> _rb;
-		std::function<void(std::shared_ptr<Entity>&)> _trigger;
+		std::function<void(std::shared_ptr<Entity>&, std::shared_ptr<Entity>&)> _trigger;
 	};
 }
 

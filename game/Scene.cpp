@@ -2,6 +2,7 @@
 
 #include "CircleGraphic.h"
 #include "PlayerBehavior.h"
+#include "EnemyTrigger.h"
 
 int game::Scene::_numTotalScenes = 0;
 
@@ -10,7 +11,7 @@ game::Scene::Scene() : _entities(), _graphics(), _behaviors()
 	_numTotalScenes++;
 
 	// set up player
-	std::shared_ptr<Entity> player(new Entity());
+	std::shared_ptr<Entity> player(new Entity("Player"));
 	player->transform.move(-50.f, 0.f);
 
 	std::shared_ptr<PlayerBehavior> pb(new PlayerBehavior());
@@ -25,9 +26,10 @@ game::Scene::Scene() : _entities(), _graphics(), _behaviors()
 	rb->SetFriction(0.1f);
 
 	std::shared_ptr<CircleCollider> cc = std::dynamic_pointer_cast<CircleCollider>(_physics.Create(typeid(CircleCollider).name(), player));
+	cc->SetTrigger(EnemyTrigger::OnCollision);
 
 	// set up enemy
-	std::shared_ptr<Entity> enemy(new Entity());
+	std::shared_ptr<Entity> enemy(new Entity("Enemy"));
 	enemy->transform.move(50.f, 0.f);
 
 	std::shared_ptr<CircleGraphic> enemyCircle = std::dynamic_pointer_cast<CircleGraphic>(_graphics.Create(typeid(CircleGraphic).name(), enemy));
@@ -39,6 +41,7 @@ game::Scene::Scene() : _entities(), _graphics(), _behaviors()
 	enemyBody->SetFriction(0.1f);
 
 	std::shared_ptr<CircleCollider> enemyCollider = std::dynamic_pointer_cast<CircleCollider>(_physics.Create(typeid(CircleCollider).name(), enemy));
+	enemyCollider->SetTrigger(EnemyTrigger::OnCollision);
 
 	// add tracking for entities
 	_entities.push_back(player);

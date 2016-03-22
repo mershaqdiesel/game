@@ -14,10 +14,14 @@ namespace game
 	{
 	public:
 		Entity();
+		Entity(std::string tag);
 		~Entity();
 
 		std::shared_ptr<Component> GetComponent(std::string name);
 		bool AddComponent(std::shared_ptr<Component> comp);
+
+		std::string GetTag() { return _tag; };
+		void SetTag(std::string t) { _tag = t; };
 
 		sf::Transform CalcTransform();
 
@@ -27,6 +31,7 @@ namespace game
 		std::shared_ptr<Entity> _parent;
 		std::vector<std::shared_ptr<Entity> > _children;
 		std::vector<std::shared_ptr<Component> > _components;
+		std::string _tag;
 	};
 }
 

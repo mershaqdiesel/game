@@ -88,9 +88,9 @@
   <ItemGroup>
     <ClCompile Include="BehaviorSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="CollisionUtil.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="EnemyTrigger.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="CircleGraphic.cpp" />
     <ClCompile Include="GraphicComponent.cpp" />
@@ -113,6 +113,7 @@
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="CollisionUtil.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="EnemyTrigger.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="GraphicComponent.h" />
